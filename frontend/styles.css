@@ -1,0 +1,411 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f3f4f6;
+  color: #111827;
+}
+
+.page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 16px 32px;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.subtitle {
+  margin: 4px 0 0;
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+/* Theme toggle */
+.theme-toggle {
+  border: none;
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  background: #111827;
+  color: #f9fafb;
+}
+
+/* Status banner */
+.status-banner {
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.status-banner::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  display: inline-block;
+}
+
+.status-available {
+  background: #ecfdf3;
+  color: #166534;
+}
+.status-available::before {
+  background: #22c55e;
+}
+
+.status-full {
+  background: #fef2f2;
+  color: #b91c1c;
+}
+.status-full::before {
+  background: #ef4444;
+}
+
+.status-unknown {
+  background: #e5e7eb;
+  color: #374151;
+}
+.status-unknown::before {
+  background: #9ca3af;
+}
+
+/* Summary cards */
+.summary-section {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.summary-card {
+  background: white;
+  border-radius: 10px;
+  padding: 12px;
+  box-shadow: 0 0 6px rgba(0,0,0,0.08);
+}
+
+.summary-card h3 {
+  margin: 0 0 8px;
+  font-size: 0.95rem;
+  color: #6b7280;
+}
+
+.summary-value {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+.summary-label {
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+/* Layout */
+.content {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+/* Slots */
+.left-panel h2,
+.right-panel h2 {
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+.left-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.slots-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px;
+}
+
+.slot-card {
+  background: white;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 0 6px rgba(0,0,0,0.08);
+  border-left: 4px solid transparent;
+  font-size: 0.9rem;
+}
+
+.slot-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.slot-title {
+  font-weight: bold;
+}
+
+.slot-status {
+  font-weight: 600;
+  font-size: 0.78rem;
+  padding: 2px 6px;
+  border-radius: 999px;
+}
+
+/* Status colors */
+.status-free {
+  color: #166534;
+  background: #dcfce7;
+}
+.status-occupied {
+  color: #b91c1c;
+  background: #fee2e2;
+}
+.status-unknown {
+  color: #4b5563;
+  background: #e5e7eb;
+}
+.sensor-error {
+  border-left-color: #f97316;
+}
+
+/* Slot body */
+.slot-body p {
+  margin: 2px 0;
+  color: #4b5563;
+  font-size: 0.8rem;
+}
+
+/* Panels on right */
+.right-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: sticky;
+  top: 10px;
+  height: fit-content;
+}
+
+.panel-card {
+  background: white;
+  border-radius: 10px;
+  padding: 12px;
+  box-shadow: 0 0 6px rgba(0,0,0,0.08);
+}
+
+/* Logs */
+.logs-card {
+  max-height: 260px;
+  overflow-y: auto;
+}
+
+.logs-list {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0;
+  font-size: 0.82rem;
+}
+
+.logs-list li {
+  padding: 4px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.log-time {
+  color: #6b7280;
+  font-size: 0.75rem;
+  display: block;
+}
+
+/* Footer */
+.footer {
+  margin-top: 20px;
+  font-size: 0.8rem;
+  color: #6b7280;
+  text-align: right;
+}
+
+/* Chart containers */
+.chart-wrapper {
+  width: 100%;
+  height: 260px;
+  position: relative;
+  overflow: hidden;
+}
+
+#occupancyChart,
+#historyChart {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
+/* Control panel */
+.control-panel {
+  margin-top: 8px;
+}
+
+.control-group {
+  margin-bottom: 12px;
+}
+
+.control-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.control-group button {
+  padding: 6px 12px;
+  margin-right: 6px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.control-group button:hover {
+  background: #1e40af;
+}
+
+.control-group input {
+  padding: 6px;
+  width: 80px;
+  margin-right: 6px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.control-status {
+  font-size: 0.78rem;
+  color: #6b7280;
+  margin-top: 4px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .content {
+    grid-template-columns: 1fr;
+  }
+  .summary-section {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .summary-section {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* DARK MODE */
+
+body.dark {
+  background: #020617;
+  color: #e5e7eb;
+}
+
+body.dark .page {
+  background: transparent;
+}
+
+body.dark .summary-card,
+body.dark .panel-card,
+body.dark .slot-card {
+  background: #020617;
+  border: 1px solid #1f2937;
+  box-shadow: none;
+}
+
+body.dark .subtitle,
+body.dark .summary-card h3,
+body.dark .slot-body p,
+body.dark .logs-list li,
+body.dark .footer,
+body.dark .log-time {
+  color: #9ca3af;
+}
+
+body.dark .theme-toggle {
+  background: #e5e7eb;
+  color: #020617;
+}
+
+body.dark .status-available {
+  background: #022c22;
+  color: #6ee7b7;
+}
+body.dark .status-full {
+  background: #450a0a;
+  color: #fecaca;
+}
+body.dark .status-unknown {
+  background: #111827;
+  color: #e5e7eb;
+}
+
+body.dark .slots-grid {
+  background: #020617;
+  padding: 4px;
+  border-radius: 8px;
+}
+
+body.dark .control-group button {
+  background: #4f46e5;
+}
+
+body.dark .control-group button:hover {
+  background: #4338ca;
+}
+
+body.dark .control-status {
+  color: #9ca3af;
+}
+
+/* Control Panel Buttons */
+
+.ctrl-btn {
+  background: #2563eb;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem; 
+}
+
+.ctrl-btn:hover {
+  background: #1e40af;
+}
+
+.control-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}

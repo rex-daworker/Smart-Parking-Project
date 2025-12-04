@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Smart Parking Dashboard</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="page">
+
+    <header class="header">
+      <div>
+        <h1>Smart Parking System</h1>
+        <p class="subtitle">Real-time parking monitoring with ultrasonic sensors & Firebase</p>
+      </div> 
+      <div class="header-right">
+        <button id="themeToggle" class="theme-toggle">🌙 Dark</button>
+        <div id="statusBanner" class="status-banner status-unknown">
+          <span id="statusText">Loading...</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- CONTROL PANEL is-->
+<section class="panel-card" style="margin-bottom: 20px;">
+  <h2>Cloud Control Panel</h2>
+
+  <div class="control-row">
+    <button class="ctrl-btn" onclick="sendCommand('open')">Open Gate</button>
+    <button class="ctrl-btn" onclick="sendCommand('close')">Close Gate</button>
+  </div>
+
+  <div class="control-row" style="margin-top:10px;">
+    <button class="ctrl-btn" onclick="sendCommand('enable')">Enable Alerts</button>
+    <button class="ctrl-btn" onclick="sendCommand('disable')">Disable Alerts</button>
+  </div>
+
+  <div class="control-row" style="margin-top:10px;">
+    <label>Distance Threshold:</label>
+    <input id="thresholdInput" type="number" value="30" min="5" max="200" style="width: 80px;">
+    <button class="ctrl-btn" onclick="updateThreshold()">Update</button>
+  </div>
+
+  <p id="cmdStatus" style="font-size:0.9rem; color:#6b7280; margin-top:10px;">
+    Waiting for command...
+  </p>
+</section>
+
+
+    <section class="summary-section">
+      <div class="summary-card">
+        <h3>Vehicles Inside</h3>
+        <p id="insideCount" class="summary-value">-</p>
+        <span id="totalSlotsLabel" class="summary-label">/ - slots</span>
+      </div>
+
+      <div class="summary-card">
+        <h3>Free Slots</h3>
+        <p id="freeSlots" class="summary-value">-</p>
+      </div>
+
+      <div class="summary-card">
+        <h3>Occupied Slots</h3>
+        <p id="occupiedSlots" class="summary-value">-</p>
+      </div>
+
+      <div class="summary-card">
+        <h3>Entries Today</h3>
+        <p id="entriesToday" class="summary-value">-</p>
+      </div>
+    </section>
+
+    <section class="content">
+
+      <!-- LEFT: Slot Status + 24h History + Logs -->
+      <div class="left-panel">
+        <h2>Slot Status</h2>
+        <div id="slotsContainer" class="slots-grid"></div>
+
+        <div class="panel-card">
+          <h2>Last 24h Occupancy</h2>
+          <div class="chart-wrapper">
+            <canvas id="historyChart"></canvas>
+          </div>
+        </div>
+
+        <div class="panel-card logs-card">
+          <h2>Recent Activity</h2>
+          <ul id="logsList" class="logs-list"></ul>
+        </div>
+      </div>
+
+      <!-- RIGHT: Donut + Control Panel -->
+      <div class="right-panel">
+        <div class="panel-card">
+          <h2>Occupancy Overview</h2>
+          <div class="chart-wrapper">
+            <canvas id="occupancyChart"></canvas>
+          </div>
+        </div>
+
+        <div class="panel-card control-panel">
+          <h2>Remote Control Panel</h2>
+
+          <div class="control-group">
+            <label>Force LED</label>
+            <button onclick="sendCommand({ action: 'turn_red' })">Red</button>
+            <button onclick="sendCommand({ action: 'turn_green' })">Green</button>
+            <button onclick="sendCommand({ action: 'none' })">Auto</button>
+          </div>
+
+          <div class="control-group">
+            <label>Distance Threshold (cm)</label>
+            <input id="thresholdInput" type="number" value="30" min="5" max="200">
+            <button onclick="updateThreshold()">Update</button>
+          </div>
+
+          <div class="control-group">
+            <label>Slot Mode</label>
+            <button onclick="sendCommand({ action: 'disable' })">Disable Slot</button>
+            <button onclick="sendCommand({ action: 'enable' })">Enable Slot</button>
+          </div>
+
+          <p id="controlStatus" class="control-status">Ready.</p>
+        </div>
+      </div>
+
+    </section>
+
+    <footer class="footer">
+      <span id="lastUpdated">Last update: -</span>
+    </footer>
+  </div>
+
+  <!-- Firebase v8 -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+  <!-- Your Firebase config -->
+  <script src="./firebase-config.js"></script>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- App Logic -->
+  <script src="./app.js?v=4"></script>
+</body>
+</html>
